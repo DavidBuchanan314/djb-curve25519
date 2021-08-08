@@ -1,0 +1,20 @@
+# intermediate build artefacts
+
+*.out
+curve25519.impl.check.h
+curve25519.impl.new
+curve25519.impl
+curve25519.impl.check
+*.o
+*.a
+curve25519.h
+cpucycles.h
+
+# binaries
+
+x86cpuid
+test-curve25519
+curve25519-speed
+
+# test results
+speedreport

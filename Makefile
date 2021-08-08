@@ -2,6 +2,7 @@
 # D. J. Bernstein
 # Public domain.
 
+CFLAGS := -m32
 
 # Test programs:
 
@@ -13,20 +14,20 @@ curve25519-speed test-curve25519
 	sh speedreport.do > speedreport
 
 test-curve25519: test-curve25519.o curve25519.a
-	$(CC) -o test-curve25519 test-curve25519.o curve25519.a
+	$(CC) $(CFLAGS) -o test-curve25519 test-curve25519.o curve25519.a
 
 test-curve25519.o: test-curve25519.c \
 curve25519_athlon.h \
 curve25519.h
-	$(CC) -c test-curve25519.c
+	$(CC) $(CFLAGS) -c test-curve25519.c
 
 curve25519-speed: curve25519-speed.o curve25519.a cpucycles.a
-	$(CC) -o curve25519-speed curve25519-speed.o curve25519.a cpucycles.a
+	$(CC) $(CFLAGS) -o curve25519-speed curve25519-speed.o curve25519.a cpucycles.a
 
 curve25519-speed.o: curve25519-speed.c \
 curve25519_athlon.h \
 curve25519.h
-	$(CC) -c curve25519-speed.c
+	$(CC) $(CFLAGS) -c curve25519-speed.c
 
 cpucycles.h: curve25519.impl \
 cpucycles.h.do
@@ -37,7 +38,7 @@ cpucycles.a: curve25519.impl \
 cpucycles_athlon.h \
 cpucycles_athlon.s \
 cpucycles.a.do
-	sh -e cpucycles.a.do $(CC) > cpucycles.a.new
+	sh -e cpucycles.a.do $(CC) $(CFLAGS) > cpucycles.a.new
 	mv cpucycles.a.new cpucycles.a
 
 
@@ -61,7 +62,7 @@ curve25519_athlon_mainloop.s \
 curve25519_athlon_mult.s \
 curve25519_athlon_square.s \
 curve25519_athlon_todouble.s
-	sh -e curve25519.a.do $(CC) > curve25519.a.new
+	sh -e curve25519.a.do $(CC) $(CFLAGS) > curve25519.a.new
 	mv curve25519.a.new curve25519.a
 
 curve25519.impl: \
@@ -77,5 +78,10 @@ curve25519_athlon_mainloop.s \
 curve25519_athlon_mult.s \
 curve25519_athlon_square.s \
 curve25519_athlon_todouble.s
-	sh -e curve25519.impl.do $(CC) > curve25519.impl.new
+	sh -e curve25519.impl.do $(CC) $(CFLAGS) > curve25519.impl.new
 	mv curve25519.impl.new curve25519.impl
+
+clean:
+	rm -f curve25519.impl.check.h curve25519.impl.new curve25519.impl \
+	curve25519.impl.check x86cpuid x86cpuid.out *.o *.a curve25519.h cpucycles.h \
+	test-curve25519 curve25519-speed speedreport
