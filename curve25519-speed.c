@@ -7,6 +7,7 @@ Public domain.
 #include <time.h>
 #include <sys/time.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "curve25519.h"
 #include "cpucycles.h"
 
@@ -16,7 +17,7 @@ long long tfinish; struct timeval tvfinish;
 long long t[21];
 long long buf[16384];
 
-main()
+int main()
 {
   unsigned char *ek;
   unsigned char *e;

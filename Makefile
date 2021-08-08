@@ -2,7 +2,7 @@
 # D. J. Bernstein
 # Public domain.
 
-CFLAGS := -m32
+CFLAGS := -m32 -no-pie
 
 # Test programs:
 

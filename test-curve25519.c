@@ -24,7 +24,7 @@ unsigned char e1[32] = {3};
 unsigned char e2[32] = {5};
 unsigned char k[32] = {9};
 
-main()
+int main()
 {
   int loop;
   int i;
